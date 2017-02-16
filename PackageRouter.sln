@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageRouter", "PackageRouter\PackageRouter.csproj", "{C4CAEB87-9981-4AD4-BF94-EDA7F65C5C0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketRouter", "PackageRouter\PacketRouter.csproj", "{C4CAEB87-9981-4AD4-BF94-EDA7F65C5C0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

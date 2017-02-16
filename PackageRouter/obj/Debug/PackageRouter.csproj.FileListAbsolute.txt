@@ -15,3 +15,5 @@ c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter
 c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter\obj\Debug\TunnerController.g.cs
 c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter\obj\Debug\GeneratedInternalTypeHelper.g.cs
 c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter\obj\Debug\TunnerController.baml
+C:\Users\mvirgulti.INIM\Documents\GitHub\PacketRouter\PackageRouter\bin\Debug\PackageRouter.exe.config
+C:\Users\mvirgulti.INIM\Documents\GitHub\PacketRouter\PackageRouter\obj\Debug\PackageRouter.pdb

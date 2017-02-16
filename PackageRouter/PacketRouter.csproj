@@ -7,8 +7,8 @@
     <ProjectGuid>{C4CAEB87-9981-4AD4-BF94-EDA7F65C5C0A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PackageRouter</RootNamespace>
-    <AssemblyName>PackageRouter</AssemblyName>
+    <RootNamespace>PacketRouter</RootNamespace>
+    <AssemblyName>PacketRouter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,10 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TunnerController.xaml.cs">
-      <DependentUpon>TunnerController.xaml</DependentUpon>
+    <Compile Include="ChannelTranceiver.cs" />
+    <Compile Include="TunnelController.xaml.cs">
+      <DependentUpon>TunnelController.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,11 +67,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainPanel.xaml.cs">
+      <DependentUpon>MainPanel.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TunnerController.xaml">
+    <Page Include="TunnelController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

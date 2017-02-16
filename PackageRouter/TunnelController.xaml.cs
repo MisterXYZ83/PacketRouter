@@ -15,13 +15,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.Concurrent;
+using PacketRouter;
 
-namespace PackageRouter
+namespace PacketRouter
 {
     /// <summary>
     /// Logica di interazione per TunnerController.xaml
     /// </summary>
-    public partial class TunnerController : UserControl
+    public partial class TunnerController : UserControl, IEndPointEventReceiver
     {
 
         protected class NetworkInterfaceItem
@@ -67,7 +69,16 @@ namespace PackageRouter
                 else return "Error";
             }
         }
-          
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// 
+
+        protected EndPointTranceiver mChannelA;
+        protected EndPointTranceiver mChannelB;
+
+
         public TunnerController()
         {
             InitializeComponent();
@@ -79,6 +90,7 @@ namespace PackageRouter
 
             UpdateIPAddressesA(0);
             UpdateIPAddressesB(0);
+
         }
 
         private void NetIntfBCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -100,6 +112,35 @@ namespace PackageRouter
             if ( CheckChannelConfiguration() )
             {
                 //canali disponibili
+                mChannelA = new EndPointTranceiver(this);
+                mChannelB = new EndPointTranceiver(this);
+
+                EndPointConfiguration cA = new EndPointConfiguration();
+                EndPointConfiguration cB = new EndPointConfiguration();
+
+                if (GetCurrentChannelConfiguration(cA, cB) )
+                {
+                    ConcurrentQueue<QueuePacket> iAtoBq = new ConcurrentQueue<QueuePacket>();
+                    ConcurrentQueue<QueuePacket> iBtoAq = new ConcurrentQueue<QueuePacket>();
+
+                    cA.InputQueue = iAtoBq;
+                    cB.InputQueue = iBtoAq;
+
+                    cA.OutputQueue = iBtoAq;
+                    cB.OutputQueue = iAtoBq;
+
+
+                    mChannelA.Configuration = cA;
+                    mChannelB.Configuration = cB;
+                }
+                else
+                {
+                    return;
+                }
+
+                mChannelA.StartEndPoint();
+                mChannelB.StartEndPoint();
+                
             }
             else
             {
@@ -111,7 +152,30 @@ namespace PackageRouter
 
         private void stopChannelButton_Click(object sender, RoutedEventArgs e)
         {
+            if (mChannelA != null && mChannelB != null)
+            {
+                mChannelA.StopEndPoint();
+                mChannelB.StopEndPoint();
 
+                UpdateChannelStatusGUI(null, 0);
+                
+                //elimino le due code
+                ConcurrentQueue<QueuePacket> qA = mChannelA.InputQueue;
+                ConcurrentQueue<QueuePacket> qB = mChannelA.OutputQueue;
+
+                QueuePacket obj = null;
+                while (!qA.IsEmpty) { qA.TryDequeue(out obj); if (obj != null) obj.Dispose(); }
+                while (!qB.IsEmpty) { qB.TryDequeue(out obj); if (obj != null) obj.Dispose(); }
+
+                mChannelA.Dispose();
+                mChannelB.Dispose();
+
+                mChannelA = null;
+                mChannelB = null;
+
+            }
+
+                 
         }
 
         private void LoadNetworkInterfaces()
@@ -258,6 +322,117 @@ namespace PackageRouter
 
             
             return true;
+        }
+
+        public bool GetCurrentChannelConfiguration(EndPointConfiguration endpA, EndPointConfiguration endpB)
+        {
+            try
+            {
+                IPAddress addrA = (netAddressesA.SelectedItem as IPAddressItem).IpAddress.Address;
+
+                int portA = int.Parse(channAPort.Text);
+
+
+                IPAddress addrB = (netAddressesB.SelectedItem as IPAddressItem).IpAddress.Address;
+
+                int portB = int.Parse(channBPort.Text);
+
+
+                if (endpA != null && endpB != null)
+                {
+                    endpA.ListeningAddress = addrA;
+                    endpA.ListeningPort = portA;
+
+                    endpB.ListeningAddress = addrB;
+                    endpB.ListeningPort = portB;
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+
+            return false;
+        }
+
+
+        public void OnRemoteConnection(EndPointTranceiver src, IPAddress remoteIp, int remotePort)
+        {
+            UpdateChannelStatusGUI(remoteIp, remotePort);
+        }
+
+        public void OnRemoteDisconnetion(EndPointTranceiver src)
+        {
+            UpdateChannelStatusGUI(null, 0);
+        }
+
+        public void OnRemotePacketReceived(EndPointTranceiver src)
+        {
+            
+        }
+
+        public void OnGenericError(EndPointTranceiver src, int errorcode)
+        {
+            UpdateChannelStatusGUI(null, 0);
+        }
+
+        public void OnChannelReady(EndPointTranceiver src)
+        {
+            UpdateChannelStatusGUI(null, 0);
+        }
+
+        protected void UpdateChannelStatusGUI(IPAddress addr, int port)
+        {
+            if (mChannelA == null || mChannelB == null) return;
+
+            ChannelStatusEnum status_a = mChannelA.ChannelStatus;
+            ChannelStatusEnum status_b = mChannelB.ChannelStatus;
+            
+            ////caanale A
+            if ( status_a == ChannelStatusEnum.Idle )
+            {
+                channelStatusA.Text = "NC";
+                channelStatusA.Background = new SolidColorBrush(Colors.Red);
+                remoteEndpointAText.Text = "Non Connesso";
+
+            }
+            else if (status_a == ChannelStatusEnum.Listening )
+            {
+                channelStatusA.Text = "LIST";
+                channelStatusA.Background = new SolidColorBrush(Colors.Yellow);
+                remoteEndpointAText.Text = "Non Connesso";
+            }
+            else if (status_a == ChannelStatusEnum.Active )
+            {
+                channelStatusA.Text = "ON";
+                channelStatusA.Background = new SolidColorBrush(Colors.Green);
+
+                if ( addr != null ) remoteEndpointAText.Text = addr.ToString() + ":" + port;
+            }
+
+            ////canale B
+            if (status_b == ChannelStatusEnum.Idle)
+            {
+                channelStatusB.Text = "NC";
+                channelStatusB.Background = new SolidColorBrush(Colors.Red);
+                remoteEndpointBText.Text = "Non Connesso";
+            }
+            else if (status_b == ChannelStatusEnum.Listening)
+            {
+                channelStatusB.Text = "LIST";
+                channelStatusB.Background = new SolidColorBrush(Colors.Yellow);
+                remoteEndpointBText.Text = "Non Connesso";
+            }
+            else if (status_b == ChannelStatusEnum.Active)
+            {
+                channelStatusB.Text = "ON";
+                channelStatusB.Background = new SolidColorBrush(Colors.Green);
+
+                if (addr != null) remoteEndpointBText.Text = addr.ToString() + ":" + port;
+            }
         }
     }
 }

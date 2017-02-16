@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PackageRouter
+namespace PacketRouter
 {
     /// <summary>
     /// Logica di interazione per MainWindow.xaml

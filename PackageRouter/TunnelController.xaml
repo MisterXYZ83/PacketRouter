@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="PackageRouter.TunnerController"
+﻿<UserControl x:Class="PacketRouter.TunnerController"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PackageRouter"
+             xmlns:local="clr-namespace:PacketRouter"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="500"
+             d:DesignHeight="180" d:DesignWidth="500"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -17,10 +17,12 @@
                 <Button x:Name="stopChannelButton" Content="STOP" HorizontalAlignment="Center" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="40" Click="stopChannelButton_Click"/>
                 <TextBox x:Name="channAPort" HorizontalAlignment="Left" Height="22" Margin="10,0,0,10" TextWrapping="Wrap" Text="45000" VerticalAlignment="Bottom" Width="50"/>
                 <TextBox x:Name="channBPort" HorizontalAlignment="Right" Height="22" Margin="0,0,10,10" TextWrapping="Wrap" Text="45001" VerticalAlignment="Bottom" Width="50"/>
-                <TextBox x:Name="channelStatus" IsEnabled="False" HorizontalAlignment="Center" Height="22" Margin="0,10,0,0" TextWrapping="Wrap" Text="NON CONNESSO" VerticalAlignment="Top" Width="120" TextAlignment="Center" FontWeight="Bold"/>
-                <ComboBox x:Name="netAddressesA" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="150"/>
-                <ComboBox x:Name="netAddressesB" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="150"/>
-
+                <TextBox x:Name="channelStatusA" IsEnabled="False" HorizontalAlignment="Center" Height="22" Margin="-70,10,0,0" TextWrapping="Wrap" Text="NC" VerticalAlignment="Top" Width="60" TextAlignment="Center" FontWeight="Bold" Background="Red"/>
+                <TextBox x:Name="channelStatusB" IsEnabled="False" HorizontalAlignment="Center" Height="22" Margin="70,10,0,0" TextWrapping="Wrap" Text="NC" VerticalAlignment="Top" Width="60" TextAlignment="Center" FontWeight="Bold" Background="Red"/>
+                <ComboBox x:Name="netAddressesA" HorizontalAlignment="Left" Margin="10,-30,0,0" VerticalAlignment="Center" Width="150"/>
+                <ComboBox x:Name="netAddressesB" HorizontalAlignment="Right" Margin="0,-30,10,0" VerticalAlignment="Center" Width="150"/>
+                <TextBox x:Name="remoteEndpointAText" HorizontalAlignment="Left" Height="22" Margin="10,30,0,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
+                <TextBox x:Name="remoteEndpointBText" HorizontalAlignment="Right" Height="22" Margin="0,30,10,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
             </Grid>
         </Border>
     </Grid>

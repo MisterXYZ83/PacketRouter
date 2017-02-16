@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter\obj\Debug\
+C:\Users\mvirgulti.INIM\Documents\GitHub\PacketRouter\PackageRouter\obj\Debug\
 PackageRouter
 none
 false
 DEBUG;TRACE
-c:\users\marco\documents\visual studio 2015\Projects\PackageRouter\PackageRouter\App.xaml
-2330436552
+C:\Users\mvirgulti.INIM\Documents\GitHub\PacketRouter\PackageRouter\App.xaml
+22147278614
 
-101725410991
+11535766699
 13738642453
-MainWindow.xaml;TunnerController.xaml;
+MainPanel.xaml;TunnelController.xaml;
 
-False
+True
 
