@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,14 +19,31 @@ namespace PacketRouter
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class MainPanel : Window
+    public partial class MainPanel : Window, IEndPointEventReceiver
     {
         public MainPanel()
         {
             InitializeComponent();
         }
 
+        public void OnChannelReady(EndPointTranceiver src)
+        {
+        }
 
+        public void OnGenericError(EndPointTranceiver src, int errorcode)
+        {
+        }
 
+        public void OnRemoteConnection(EndPointTranceiver src, IPAddress remoteIp, int remotePort)
+        {
+        }
+
+        public void OnRemoteDisconnetion(EndPointTranceiver src)
+        {
+        }
+
+        public void OnRemotePacketReceived(EndPointTranceiver src)
+        {
+        }
     }
 }
