@@ -15,14 +15,14 @@
                 <ComboBox x:Name="netIntfBCombo" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="150"/>
                 <Button x:Name="startChannelButton" Content="START" HorizontalAlignment="Center" Margin="-50,0,0,10" VerticalAlignment="Bottom" Width="40" Click="startChannelButton_Click"/>
                 <Button x:Name="stopChannelButton" Content="STOP" HorizontalAlignment="Center" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="40" Click="stopChannelButton_Click"/>
-                <TextBox x:Name="channAPort" HorizontalAlignment="Left" Height="22" Margin="10,0,0,10" TextWrapping="Wrap" Text="45000" VerticalAlignment="Bottom" Width="50"/>
-                <TextBox x:Name="channBPort" HorizontalAlignment="Right" Height="22" Margin="0,0,10,10" TextWrapping="Wrap" Text="45001" VerticalAlignment="Bottom" Width="50"/>
+                <TextBox x:Name="channAPort" HorizontalAlignment="Left" Height="22" Margin="10,0,0,10" TextWrapping="Wrap" Text="45000" VerticalAlignment="Bottom" Width="50" TextAlignment="Left"/>
+                <TextBox x:Name="channBPort" HorizontalAlignment="Right" Height="22" Margin="0,0,10,10" TextWrapping="Wrap" Text="45001" VerticalAlignment="Bottom" Width="50" TextAlignment="Right"/>
                 <TextBox x:Name="channelStatusA" IsEnabled="False" HorizontalAlignment="Center" Height="22" Margin="-70,10,0,0" TextWrapping="Wrap" Text="NC" VerticalAlignment="Top" Width="60" TextAlignment="Center" FontWeight="Bold" Background="Red"/>
                 <TextBox x:Name="channelStatusB" IsEnabled="False" HorizontalAlignment="Center" Height="22" Margin="70,10,0,0" TextWrapping="Wrap" Text="NC" VerticalAlignment="Top" Width="60" TextAlignment="Center" FontWeight="Bold" Background="Red"/>
                 <ComboBox x:Name="netAddressesA" HorizontalAlignment="Left" Margin="10,-30,0,0" VerticalAlignment="Center" Width="150"/>
                 <ComboBox x:Name="netAddressesB" HorizontalAlignment="Right" Margin="0,-30,10,0" VerticalAlignment="Center" Width="150"/>
-                <TextBox x:Name="remoteEndpointAText" HorizontalAlignment="Left" Height="22" Margin="10,30,0,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
-                <TextBox x:Name="remoteEndpointBText" HorizontalAlignment="Right" Height="22" Margin="0,30,10,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
+                <TextBox x:Name="remoteEndpointAText" HorizontalAlignment="Left" Height="22" Margin="10,30,0,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False" TextAlignment="Left"/>
+                <TextBox x:Name="remoteEndpointBText" HorizontalAlignment="Right" Height="22" Margin="0,30,10,0" TextWrapping="Wrap" Text="Non Connesso" VerticalAlignment="Center" Width="150" IsEnabled="False" TextAlignment="Right"/>
             </Grid>
         </Border>
     </Grid>
